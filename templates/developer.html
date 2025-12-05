@@ -1,60 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bootstrap demo</title>
+    <title>MediPredict AI | Created By Team</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-      crossorigin="anonymous"
     />
+
     <style>
-      .logo {
-        width: 50px;
-        height: 50px;
-        margin-top: 0;
-        margin-left: 2px;
+      :root {
+        --font-family: 'Poppins', sans-serif;
+        --primary-gradient: linear-gradient(45deg, #007bff, #00c6ff);
+        --secondary-gradient: linear-gradient(45deg, #28a745, #20c997);
+        --form-bg-light: #ffffff;
+        --form-shadow-light: 0 10px 30px rgba(0, 0, 0, 0.1);
+        --text-color-light: #212529;
+        --bg-color-light: #f4f7f9;
+        
+        /* Dark Mode Variables (Fallbacks for JS) */
+        --form-bg-dark: #212529;
+        --form-shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.5);
+        --text-color-dark: #e9ecef;
+        --bg-color-dark: #121212;
+      }
+      
+      /* Light Mode Defaults */
+      body {
+        background-color: var(--bg-color-light);
+        font-family: var(--font-family);
+        color: var(--text-color-light);
+        transition: background-color 0.4s, color 0.4s;
+      }
+
+      /* Dark Mode Overrides (Controlled by data-bs-theme) */
+      [data-bs-theme="dark"] body {
+        background-color: var(--bg-color-dark);
+        color: var(--text-color-dark);
+      }
+      
+      [data-bs-theme="dark"] .navbar {
+        background-color: #1a1a1a !important;
+        box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+      }
+      
+      [data-bs-theme="dark"] .main-heading {
+          color: var(--text-color-dark);
+      }
+      [data-bs-theme="dark"] .team-card {
+          background-color: #2b3035 !important;
+          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+      }
+      [data-bs-theme="dark"] .input-group .form-control {
+          background-color: #343a40;
+          color: white;
+          border-color: #495057;
+      }
+
+      /* Navbar Styling */
+      .navbar-brand {
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        background-image: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
       .myimg {
-        width: 50px;
-        height: 50px;
-        border: 2px solid black;
-        border-radius: 25px;
+        width: 45px;
+        height: 45px;
+        border: 3px solid #007bff;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        transition: transform 0.3s ease;
+      }
+      .myimg:hover {
+          transform: scale(1.05);
+      }
+
+      .main-heading {
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #007bff;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Team Section Styling */
+      .team-intro {
+        max-width: 900px;
+        margin: 0 auto 3rem;
+        padding: 30px;
+        border-radius: 15px;
+        background: var(--form-bg-light);
+        box-shadow: var(--form-shadow-light);
+      }
+      
+      .team-card {
+        text-align: center;
+        padding: 20px;
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #ffffff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        height: 100%; /* Ensures all cards are the same height */
+      }
+      
+      .team-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0, 123, 255, 0.2);
+      }
+
+      .team-card h5 {
+        font-weight: 700;
+        margin-top: 15px;
+        color: #007bff;
+      }
+      
+      .team-role-line {
+          font-weight: 500;
+          color: #6c757d;
+          font-style: italic;
+          margin-bottom: 10px;
+      }
+
+      .member-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #007bff;
+        margin: 0 auto;
+      }
+      
+      /* Feature: Dark Mode Toggle Switch (Copied from previous file) */
+      .theme-switch-wrapper {
+        display: flex;
+        align-items: center;
+      }
+      .theme-switch {
+        display: inline-block;
+        height: 34px;
+        position: relative;
+        width: 60px;
+        margin-left: 15px;
+      }
+      .theme-switch input {
+        display: none;
+      }
+      .slider {
+        background-color: #ccc;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+      .slider:before {
+        background-color: #fff;
+        bottom: 4px;
+        content: "";
+        height: 26px;
+        left: 4px;
+        position: absolute;
+        transition: 0.4s;
+        width: 26px;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: var(--primary-gradient);
+      }
+      input:checked + .slider:before {
+        transform: translateX(26px);
       }
     </style>
   </head>
+
   <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <div class="logo">
-          <img
-            class="myimg"
-            src="{{ url_for('static', filename='img.png') }}"
-            alt=""
-          />
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" data-bs-theme="dark">
+      <div class="container-fluid container-xl">
+        <div class="d-flex align-items-center me-3">
+          <div class="logo">
+            <img
+              class="myimg"
+              src="{{ url_for('static', filename='img.png') }}"
+              alt="Logo"
+            />
+          </div>
+          <a class="navbar-brand ms-3" href="#">MediPredict AI</a>
         </div>
 
-        <a class="navbar-brand" href="#">Health Center</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="d-flex align-items-center">
+            <div class="theme-switch-wrapper d-none d-lg-flex">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sun-fill text-warning me-2" viewBox="0 0 16 16">
+                    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.414a.5.5 0 1 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.75 12.879a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+                </svg>
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider"></div>
+                </label>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-moon-fill text-info ms-2" viewBox="0 0 16 16">
+                    <path d="M6 .278a.77.77 0 0 1-.3.725l-2.73 1.96 1.134 3.424a.77.77 0 0 1-.16.746c-.22.25-.53.385-.853.385-.32 0-.62-.132-.835-.373l-.924-1.03-3.05 1.059a.77.77 0 0 1-.415-.494l-.75-2.25c-.114-.34-.055-.71.16-1.02.215-.31.54-.485.875-.485.337 0 .65.176.873.483l.896 1.25.924-1.03a.77.77 0 0 1 .65-.372c.323 0 .633.134.853.385.215.25.326.57.326.892zM10.854.79a.5.5 0 0 1 .637-.052l1.528 1.185a.5.5 0 0 1-.637.785L11.516 1.465a.5.5 0 0 1-.662-.767"/>
+                </svg>
+            </div>
+            
+            <button
+              class="navbar-toggler ms-3"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" href="/">Home</a>
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/about">About</a>
@@ -63,72 +243,143 @@
               <a class="nav-link" href="/contact">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/developer">Developer</a>
+              <a class="nav-link active" aria-current="page" href="/developer">Developed by</a>
             </li>
             <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
           </ul>
 
           <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
+            <div class="input-group">
+                <input
+                  class="form-control"
+                  type="search"
+                  placeholder="Search symptoms..."
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-info" type="submit">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.085.122l3.02 3.02a.5.5 0 0 0 .708-.708l-3.019-3.02q-.06-.043-.122-.085m-1.428 1.428a5.5 5.5 0 1 1-7.78-7.78 5.5 5.5 0 0 1 7.78 7.78"/>
+                  </svg>
+                </button>
+            </div>
           </form>
         </div>
       </div>
     </nav>
 
-    <!-- Dev -->
-    <div class="container my-4 mt-4">
-      <h6>About Pushpendra Singh</h6>
-      <h5>Meet the Developer</h5>
+    <div class="container my-5">
+        <h1 class="text-center main-heading display-4">
+            🚀 Meet The Visionary Team
+        </h1>
 
-      <p>
-        Hello, I'm <b>Pushpendra Singh</b>, your AI and Machine Learning
-        Engineer. I am passionate about harnessing the power of technology to
-        make a positive impact on people's lives. Allow me to share a bit about
-        my journey in the world of artificial intelligence and machine learning.
-      </p>
-      <h5>My Expertise</h5>
-      <p>
-        With a strong academic background in computer science and a deep
-        fascination for AI and ML, I embarked on a journey that has taken me
-        across the globe, working on diverse and innovative projects. Over the
-        years, I've had the privilege of collaborating on international projects
-        that have pushed the boundaries of what's possible in AI and ML.
-      </p>
-      <h5>A Commitment to Excellence</h5>
-      <p>
-        My work is driven by a commitment to excellence and a belief that
-        technology should be accessible and beneficial to everyone. Whether it's
-        developing predictive models, creating intelligent algorithms, or
-        designing user-friendly interfaces, I strive for solutions that are both
-        cutting-edge and user-centric.
-      </p>
-      <h5>Passion for Health Tech</h5>
-      <p>
-        The development of [Your Website Name] represents a convergence of my
-        passion for AI and my dedication to improving healthcare accessibility.
-        I believe that AI has the potential to transform the way we approach
-        healthcare, making it more personalized and informative. This platform
-        is a testament to that vision.
-      </p>
-      <h5>Join Me on this Journey</h5>
-      <p>
-        I invite you to explore [Your Website Name] and experience firsthand the
-        fusion of AI and healthcare. Together, we can empower individuals with
-        knowledge, promote well-being, and contribute to a brighter and
-        healthier future.
-      </p>
+        <div class="team-intro mb-5">
+            <h4 class="fw-bold mb-3" style="color: #007bff;">Project HealthBot: Our Collective Mission</h4>
+            <p>
+                The <b>AI Health Center</b> platform is the culmination of a collaborative effort by six passionate engineers and data scientists. Our mission was to democratize preliminary health diagnosis using cutting-edge Machine Learning, ensuring rapid, informative, and accessible insights for everyone.
+            </p>
+            <p class="fst-italic text-secondary">
+                "Together, we engineered not just a predictor, but a path to proactive health knowledge."
+            </p>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            
+            <div class="col">
+                <div class="team-card">
+                    <img src="https://placehold.co/100x100/007bff/ffffff?text=PS" alt="Pushpendra Singh" class="member-avatar">
+                    <h5 class="mt-4">Pushpendra Singh</h5>
+                    <p class="team-role-line">A core contributor to this health prediction platform.</p>
+                    <p class="text-muted small">Leading the design and development efforts.</p>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="team-card">
+                    <img src="https://placehold.co/100x100/28a745/ffffff?text=MB" alt="Mukund Bansal" class="member-avatar" style="border-color: #28a745;">
+                    <h5 class="mt-4">Mukund Bansal</h5>
+                    <p class="team-role-line">A core contributor to this health prediction platform.</p>
+                    <p class="text-muted small">Focused on robust backend system architecture.</p>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="team-card">
+                    <img src="https://placehold.co/100x100/dc3545/ffffff?text=NG" alt="Nikhil Gupta" class="member-avatar" style="border-color: #dc3545;">
+                    <h5 class="mt-4">Nikhil Gupta</h5>
+                    <p class="team-role-line">A core contributor to this health prediction platform.</p>
+                    <p class="text-muted small">Worked on data integrity and model refinement.</p>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="team-card">
+                    <img src="https://placehold.co/100x100/ffc107/212529?text=SM" alt="Saket Mishra" class="member-avatar" style="border-color: #ffc107;">
+                    <h5 class="mt-4">Saket Mishra</h5>
+                    <p class="team-role-line">A core contributor to this health prediction platform.</p>
+                    <p class="text-muted small">Dedicated to optimizing the user interface and experience.</p>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="team-card">
+                    <img src="https://placehold.co/100x100/6f42c1/ffffff?text=PG" alt="Prakhar Gupta" class="member-avatar" style="border-color: #6f42c1;">
+                    <h5 class="mt-4">Prakhar Gupta</h5>
+                    <p class="team-role-line">A core contributor to this health prediction platform.</p>
+                    <p class="text-muted small">Ensured seamless integration of all technical components.</p>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="team-card">
+                    <img src="https://placehold.co/100x100/17a2b8/ffffff?text=A" alt="Ayush" class="member-avatar" style="border-color: #17a2b8;">
+                    <h5 class="mt-4">Ayush</h5>
+                    <p class="team-role-line">A core contributor to this health prediction platform.</p>
+                    <p class="text-muted small">Handled quality assurance and final project documentation.</p>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-      crossorigin="anonymous"
-    ></script>
+    
+    <script>
+      const checkbox = document.getElementById("checkbox");
+      const htmlElement = document.documentElement;
+
+      // --- Dark/Light Mode Logic ---
+      function setTheme(theme) {
+          htmlElement.setAttribute('data-bs-theme', theme);
+          localStorage.setItem('theme', theme);
+          
+          // Adjust Navbar based on theme
+          const navbar = document.querySelector('.navbar');
+          if (theme === 'dark') {
+              navbar.setAttribute('data-bs-theme', 'dark');
+              navbar.classList.add('bg-dark');
+          } else {
+              navbar.setAttribute('data-bs-theme', 'dark'); // Still dark navbar for contrast
+              navbar.classList.remove('bg-dark');
+              navbar.style.backgroundColor = 'white'; // Fallback for light body BG
+          }
+      }
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      setTheme(savedTheme);
+      if (savedTheme === 'dark') {
+          checkbox.checked = true;
+      }
+
+      // Event listener for toggle switch
+      checkbox.addEventListener('change', function () {
+          if (this.checked) {
+              setTheme('dark');
+          } else {
+              setTheme('light');
+          }
+      });
+      // --- End Dark/Light Mode Logic ---
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

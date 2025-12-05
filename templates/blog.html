@@ -1,60 +1,224 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Blog Post</title>
+    <title>AI Health Center | Blog Post: ML Diagnosis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-      crossorigin="anonymous"
     />
+
     <style>
-      .logo {
-        width: 50px;
-        height: 50px;
-        margin-top: 0;
-        margin-left: 2px;
+      :root {
+        --font-family: 'Poppins', sans-serif;
+        --primary-gradient: linear-gradient(45deg, #007bff, #00c6ff);
+        --secondary-gradient: linear-gradient(45deg, #28a745, #20c997);
+        --form-bg-light: #ffffff;
+        --form-shadow-light: 0 10px 30px rgba(0, 0, 0, 0.1);
+        --text-color-light: #212529;
+        --bg-color-light: #f4f7f9;
+        
+        /* Dark Mode Variables */
+        --form-bg-dark: #212529;
+        --form-shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.5);
+        --text-color-dark: #e9ecef;
+        --bg-color-dark: #121212;
+      }
+      
+      /* Light Mode Defaults */
+      body {
+        background-color: var(--bg-color-light);
+        font-family: var(--font-family);
+        color: var(--text-color-light);
+        transition: background-color 0.4s, color 0.4s;
+      }
+
+      /* Dark Mode Overrides (Controlled by data-bs-theme) */
+      [data-bs-theme="dark"] body {
+        background-color: var(--bg-color-dark);
+        color: var(--text-color-dark);
+      }
+      
+      [data-bs-theme="dark"] .navbar {
+        background-color: #1a1a1a !important;
+        box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+      }
+      
+      [data-bs-theme="dark"] .blog-article {
+          background-color: #1e1e1e !important;
+          box-shadow: 0 10px 40px rgba(0, 123, 255, 0.15);
+      }
+      [data-bs-theme="dark"] .main-heading, [data-bs-theme="dark"] h3 {
+          color: var(--text-color-dark) !important;
+      }
+      
+      [data-bs-theme="dark"] .input-group .form-control {
+          background-color: #343a40;
+          color: white;
+          border-color: #495057;
+      }
+      
+
+      /* Navbar Styling */
+      .navbar-brand {
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        background-image: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
       .myimg {
-        width: 50px;
-        height: 50px;
-        border: 2px solid black;
-        border-radius: 25px;
+        width: 45px;
+        height: 45px;
+        border: 3px solid #007bff;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        transition: transform 0.3s ease;
+      }
+      .myimg:hover {
+          transform: scale(1.05);
+      }
+
+      /* Blog Content Styling */
+      .blog-article {
+          max-width: 900px;
+          margin: 3rem auto;
+          padding: 40px;
+          background-color: var(--form-bg-light);
+          border-radius: 20px;
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+          line-height: 1.7;
+          transition: background-color 0.4s;
+      }
+
+      .article-title {
+        font-weight: 900;
+        letter-spacing: 1px;
+        background-image: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-heading {
+          font-weight: 700;
+          color: #28a745;
+          margin-top: 2rem;
+          padding-bottom: 5px;
+          border-bottom: 2px solid #e9ecef;
+      }
+      
+      [data-bs-theme="dark"] .section-heading {
+          border-bottom-color: #343a40;
+      }
+
+      ol li, ul li {
+          margin-bottom: 10px;
+          padding-left: 5px;
+      }
+
+      /* Feature: Dark Mode Toggle Switch */
+      .theme-switch-wrapper {
+        display: flex;
+        align-items: center;
+      }
+      .theme-switch {
+        display: inline-block;
+        height: 34px;
+        position: relative;
+        width: 60px;
+        margin-left: 15px;
+      }
+      .theme-switch input {
+        display: none;
+      }
+      .slider {
+        background-color: #ccc;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+      .slider:before {
+        background-color: #fff;
+        bottom: 4px;
+        content: "";
+        height: 26px;
+        left: 4px;
+        position: absolute;
+        transition: 0.4s;
+        width: 26px;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: var(--primary-gradient);
+      }
+      input:checked + .slider:before {
+        transform: translateX(26px);
       }
     </style>
   </head>
+
   <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <div class="logo">
-          <img
-            class="myimg"
-            src="{{ url_for('static', filename='img.png') }}"
-            alt=""
-          />
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" data-bs-theme="dark">
+      <div class="container-fluid container-xl">
+        <div class="d-flex align-items-center me-3">
+          <div class="logo">
+            <img
+              class="myimg"
+              src="{{ url_for('static', filename='img.png') }}"
+              alt="Logo"
+            />
+          </div>
+          <a class="navbar-brand ms-3" href="#">MediPredict AI</a>
         </div>
 
-        <a class="navbar-brand" href="#">Health Center</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="d-flex align-items-center">
+            <div class="theme-switch-wrapper d-none d-lg-flex">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sun-fill text-warning me-2" viewBox="0 0 16 16">
+                    <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.414a.5.5 0 1 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.75 12.879a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+                </svg>
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider"></div>
+                </label>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-moon-fill text-info ms-2" viewBox="0 0 16 16">
+                    <path d="M6 .278a.77.77 0 0 1-.3.725l-2.73 1.96 1.134 3.424a.77.77 0 0 1-.16.746c-.22.25-.53.385-.853.385-.32 0-.62-.132-.835-.373l-.924-1.03-3.05 1.059a.77.77 0 0 1-.415-.494l-.75-2.25c-.114-.34-.055-.71.16-1.02.215-.31.54-.485.875-.485.337 0 .65.176.873.483l.896 1.25.924-1.03a.77.77 0 0 1 .65-.372c.323 0 .633.134.853.385.215.25.326.57.326.892zM10.854.79a.5.5 0 0 1 .637-.052l1.528 1.185a.5.5 0 0 1-.637.785L11.516 1.465a.5.5 0 0 1-.662-.767"/>
+                </svg>
+            </div>
+            
+            <button
+              class="navbar-toggler ms-3"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" href="/">Home</a>
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/about">About</a>
@@ -63,130 +227,152 @@
               <a class="nav-link" href="/contact">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/developer">Developer</a>
+              <a class="nav-link" href="/developer">Developed By</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/blog">Blog</a>
+            </li>
           </ul>
 
           <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
+            <div class="input-group">
+                <input
+                  class="form-control"
+                  type="search"
+                  placeholder="Search health topics..."
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-info" type="submit">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.085.122l3.02 3.02a.5.5 0 0 0 .708-.708l-3.019-3.02q-.06-.043-.122-.085m-1.428 1.428a5.5 5.5 0 1 1-7.78-7.78 5.5 5.5 0 0 1 7.78 7.78"/>
+                  </svg>
+                </button>
+            </div>
           </form>
         </div>
       </div>
     </nav>
 
-    <!-- Blog -->
-    <div class="container my-4 mt-4">
-      <h2 class="text-center">
-        Building a Symptom-Based Disease Diagnosis Web App with Flask and
-        Machine Learning
-      </h2>
-      <p>
-        In the age of technology and information, access to accurate and timely
-        healthcare is more critical than ever. With the increasing importance of
-        remote healthcare solutions, we embarked on a journey to develop a
-        symptom-based disease diagnosis web application. Leveraging Flask for
-        the backend and a Decision Tree Classifier model, we created a
-        user-friendly platform that can help users identify potential illnesses
-        based on their reported symptoms.
-      </p>
+    <div class="container">
+      <div class="blog-article">
+        <h2 class="text-center article-title display-5">
+            Building a Symptom-Based Disease Diagnosis Web App with Flask and Machine Learning
+        </h2>
+        <p class="lead text-center text-muted mb-5">
+            **Published:** December 6, 2025 | **Category:** AI in Healthcare
+        </p>
 
-      <h3>The Problem</h3>
-      <p>
-        The project began with recognizing a common issue: people often
-        experience symptoms and want quick answers about their health concerns.
-        It can be challenging to differentiate between various diseases,
-        especially when symptoms overlap. Our goal was to provide a convenient
-        solution for users to input their symptoms and receive potential
-        diagnoses.
-      </p>
+        <p>
+            In the age of technology and information, access to accurate and timely healthcare is more critical than ever. With the increasing importance of remote healthcare solutions, we embarked on a journey to develop a **symptom-based disease diagnosis web application**. Leveraging **Flask** for the backend and a robust **Decision Tree Classifier model**, we created a user-friendly platform that can help users identify potential illnesses based on their reported symptoms.
+        </p>
+        
+        <hr />
 
-      <h3>The Solution</h3>
-      <p>
-        We developed a web app that allows users to enter a list of symptoms
-        they are experiencing. The app then uses a pre-trained Decision Tree
-        Classifier model to predict the most likely disease based on the
-        provided symptoms. Here's how it works:
-      </p>
+        <h3 class="section-heading">💡 The Problem Statement</h3>
+        <p>
+            The project began with recognizing a common issue: people often experience symptoms and want quick answers about their health concerns. It can be challenging to differentiate between various diseases, especially when symptoms overlap. Our goal was to provide a convenient, pre-consultation solution for users to input their symptoms and receive potential initial diagnoses. **(Note: This app is for informational purposes only and is not a substitute for professional medical advice.)**
+        </p>
 
-      <ol>
-        <li>
-          <b><strong>Symptom Input:</strong></b> Users enter their symptoms
-          through a user-friendly interface. The web app supports a wide range
-          of symptoms, making it versatile for different scenarios.
-        </li>
-        <li>
-          <b><strong>Machine Learning Model:</strong></b> We trained a Decision
-          Tree Classifier using a dataset containing symptoms and corresponding
-          diseases. The model is capable of predicting diseases based on input
-          symptoms.
-        </li>
-        <li>
-          <b><strong>Prediction:</strong></b> The app uses the model to predict
-          the most likely disease, providing users with instant information
-          about potential health concerns.
-        </li>
-        <li>
-          <b><strong>Additional Information: </strong></b> To enhance user
-          experience, the app also provides additional information about the
-          predicted disease. This includes a description of the disease,
-          recommended precautions, medications, dietary advice, and workout
-          tips.
-        </li>
-      </ol>
+        <h3 class="section-heading">🛠️ The Machine Learning Solution</h3>
+        <p>
+            We developed a web app that allows users to enter a list of symptoms they are experiencing. The app then uses a **pre-trained Decision Tree Classifier model** to predict the most likely disease based on the provided symptoms. Here's a breakdown of the workflow:
+        </p>
 
-      <h3>Key Features</h3>
-      <ul type="circle">
-        <li>
-          <b><strong>User-Friendly Interface:</strong></b> The web app boasts an
-          intuitive and easy-to-navigate interface, ensuring that users can
-          input their symptoms without any hassle.
-        </li>
-        <li>
-          <b><strong>Accurate Predictions:</strong></b> Leveraging machine
-          learning, our model provides accurate disease predictions based on the
-          symptoms provided by the user.
-        </li>
-        <li>
-          <b><strong>Comprehensive Information: </strong></b>In addition to
-          predictions, the app offers comprehensive information about the
-          predicted disease, including descriptions, precautions, medications,
-          diet recommendations, and workout tips.
-        </li>
-        <li>
-          <b><strong>ducational Content:</strong></b> To empower users with
-          knowledge, the app includes informative blog posts about various
-          health topics.
-        </li>
-      </ul>
+        <ol>
+            <li>
+                <b>Symptom Input:</b> Users enter their symptoms through a user-friendly interface (e.g., dropdowns, checkboxes). The web app supports a wide range of symptoms, making it versatile for different scenarios.
+            </li>
+            <li>
+                <b>Data Processing:</b> The input symptoms are converted into the numerical format (vector) required by the Machine Learning model.
+            </li>
+            <li>
+                <b>Machine Learning Model:</b> We trained a **Decision Tree Classifier** using a comprehensive dataset linking symptoms to diseases. This model is ideal for hierarchical diagnosis and offers high interpretability. 
 
-      <br />
+[Image of Decision Tree Algorithm flow chart]
 
-      <h3>Conclusion</h3>
-      <p>
-        Our Symptom-Based Disease Diagnosis Web App brings the power of machine
-        learning and healthcare information to the fingertips of users. It
-        serves as a valuable resource for individuals looking to gain insights
-        into their health conditions quickly and conveniently. By combining
-        technology and healthcare, we aim to make healthcare more accessible and
-        user-centric. In an era where remote healthcare solutions are gaining
-        prominence, this project represents a significant step forward in
-        providing accessible and reliable healthcare information to the masses.
-        We hope that this project will contribute to better health awareness and
-        ultimately improve the well-being of individuals worldwide.
-      </p>
+            </li>
+            <li>
+                <b>Prediction:</b> The Flask backend utilizes the model to predict the most likely disease, providing users with instant information about potential health concerns.
+            </li>
+            <li>
+                <b>Additional Information:</b> To enhance user experience, the app also provides additional information about the predicted disease. This includes a disease description, recommended **precautions**, suggested **medications**, **dietary advice**, and **workout tips**.
+            </li>
+        </ol>
+
+        <h3 class="section-heading">🌟 Key Features of the Platform</h3>
+        <ul class="list-unstyled">
+            <li class="mb-3">
+                <p class="fw-bold text-primary mb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightning-fill me-2" viewBox="0 0 16 16">
+                        <path d="M5.525 1.5A.5.5 0 0 1 6 1v4.5a.5.5 0 0 1-.8.4L3.7 3.5a.5.5 0 0 1 .4-.8l1.425 1.8A.5.5 0 0 1 5.525 1.5zM11.475 1.5A.5.5 0 0 1 12 1v4.5a.5.5 0 0 1-.8.4l-1.425-1.8a.5.5 0 0 1 .4-.8l1.425 1.8A.5.5 0 0 1 11.475 1.5zM8 7.5A.5.5 0 0 1 8.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zM8 10.5A.5.5 0 0 1 8.5 10h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zM8 13.5A.5.5 0 0 1 8.5 13h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    **Rapid & Accurate Predictions:** </p>
+                <p class="ms-4 text-muted small">Leveraging machine learning for quick, data-driven disease suggestions based on user inputs.</p>
+            </li>
+            <li class="mb-3">
+                <p class="fw-bold text-success mb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-fill me-2" viewBox="0 0 16 16">
+                        <path d="M8 1.783c-1.664 0-3.328 1.341-3.328 3.328v6.784c0 1.987 1.664 3.328 3.328 3.328s3.328-1.341 3.328-3.328V5.111c0-1.987-1.664-3.328-3.328-3.328z"/>
+                    </svg>
+                    **Comprehensive Information:** </p>
+                <p class="ms-4 text-muted small">Beyond just the diagnosis, the app offers complete descriptions, precautions, diet, and exercise guidance for the predicted illness.</p>
+            </li>
+            <li class="mb-3">
+                <p class="fw-bold text-info mb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill me-2" viewBox="0 0 16 16">
+                        <path d="M7 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H7zm-5-3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                    </svg>
+                    **User-Centric Interface:** </p>
+                <p class="ms-4 text-muted small">The web app boasts an intuitive and easy-to-navigate interface, ensuring a hassle-free experience for all users.</p>
+            </li>
+        </ul>
+
+        <h3 class="section-heading">🎯 Conclusion</h3>
+        <p>
+            Our Symptom-Based Disease Diagnosis Web App brings the power of **machine learning and accessible healthcare information** to the fingertips of users. It serves as a valuable initial resource for individuals looking to gain insights into their health conditions quickly and conveniently. By combining technology (Flask and ML) and health awareness, we aim to make preliminary health assessment more **accessible and user-centric** in a growing era of remote healthcare solutions. This project represents a significant step forward in providing accessible and reliable information to the masses, contributing to better health awareness and well-being worldwide.
+        </p>
+      </div>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-      crossorigin="anonymous"
-    ></script>
+    
+    <script>
+      const checkbox = document.getElementById("checkbox");
+      const htmlElement = document.documentElement;
+
+      // --- Dark/Light Mode Logic ---
+      function setTheme(theme) {
+          htmlElement.setAttribute('data-bs-theme', theme);
+          localStorage.setItem('theme', theme);
+          
+          // Adjust Navbar based on theme
+          const navbar = document.querySelector('.navbar');
+          if (theme === 'dark') {
+              navbar.setAttribute('data-bs-theme', 'dark');
+              navbar.classList.add('bg-dark');
+          } else {
+              navbar.setAttribute('data-bs-theme', 'dark'); // Still dark navbar for contrast
+              navbar.classList.remove('bg-dark');
+              navbar.style.backgroundColor = 'white'; // Fallback for light body BG
+          }
+      }
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      setTheme(savedTheme);
+      if (savedTheme === 'dark') {
+          checkbox.checked = true;
+      }
+
+      // Event listener for toggle switch
+      checkbox.addEventListener('change', function () {
+          if (this.checked) {
+              setTheme('dark');
+          } else {
+              setTheme('light');
+          }
+      });
+      // --- End Dark/Light Mode Logic ---
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

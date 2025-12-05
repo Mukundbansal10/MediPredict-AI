@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MediPredict AI | Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --font-family: 'Poppins', sans-serif;
+        --primary-gradient: linear-gradient(45deg, #007bff, #00c6ff);
+        --secondary-gradient: linear-gradient(45deg, #28a745, #20c997);
+        --form-bg-light: #ffffff;
+        --form-shadow-light: 0 10px 30px rgba(0, 0, 0, 0.1);
+        --text-color-light: #212529;
+        --bg-color-light: #f4f7f9;
+        
+        /* Dark Mode Variables */
+        --form-bg-dark: #212529;
+        --form-shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.5);
+        --text-color-dark: #e9ecef;
+        --bg-color-dark: #121212;
+      }
+      
+      /* Light Mode Defaults */
+      body {
+        background-color: var(--bg-color-light);
+        font-family: var(--font-family);
+        color: var(--text-color-light);
+        transition: background-color 0.4s, color 0.4s;
+      }
+
+      /* Dark Mode Overrides (Controlled by data-bs-theme) */
+      [data-bs-theme="dark"] body {
+        background-color: var(--bg-color-dark);
+        color: var(--text-color-dark);
+      }
+      
+      [data-bs-theme="dark"] .auth-card {
+          background-color: #1e1e1e !important;
+          box-shadow: 0 10px 40px rgba(0, 123, 255, 0.15);
+      }
+      
+      [data-bs-theme="dark"] .form-control {
+          background-color: #343a40;
+          color: white;
+          border-color: #495057;
+      }
+      
+
+      /* Header Styling (Replaces Navbar) */
+      .app-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        background-color: var(--form-bg-light);
+        transition: background-color 0.4s;
+      }
+      
+      [data-bs-theme="dark"] .app-header {
+          background-color: #1a1a1a !important;
+          border-bottom-color: rgba(255, 255, 255, 0.1);
+      }
+
+
+      .brand-title {
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        background-image: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 1.5rem;
+        text-decoration: none;
+      }
+
+      .myimg {
+        width: 45px;
+        height: 45px;
+        border: 3px solid #007bff;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        transition: transform 0.3s ease;
+      }
+      .myimg:hover {
+          transform: scale(1.05);
+      }
+      
+      /* Register Card Styling */
+      .auth-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: calc(100vh - 76px); /* Adjust height for header */
+          padding: 20px 0;
+      }
+      
+      .auth-card {
+        max-width: 450px;
+        width: 100%;
+        padding: 40px;
+        border-radius: 20px;
+        background: var(--form-bg-light);
+        box-shadow: var(--form-shadow-light);
+        transition: all 0.4s ease;
+      }
+
+      .auth-title {
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        background-image: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1.5rem;
+      }
+
+      .form-control {
+        border-radius: 10px;
+        padding: 12px 15px;
+        border: 1px solid #ced4da;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+      .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.2);
+        background-color: inherit;
+        color: inherit;
+      }
+      
+      .main-btn {
+        background-image: var(--primary-gradient);
+        border: none !important;
+        border-radius: 50px !important;
+        padding: 10px 30px;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+        transition: all 0.3s ease;
+        color: white;
+      }
+      .main-btn:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 123, 255, 0.6);
+      }
+      
+      .google-btn {
+          border: 1px solid #ced4da;
+          background-color: transparent;
+          color: var(--text-color-light);
+          padding: 10px;
+          border-radius: 50px;
+          transition: all 0.3s;
+      }
+      [data-bs-theme="dark"] .google-btn {
+          color: var(--text-color-dark);
+          border-color: #495057;
+      }
+      .google-btn:hover {
+          background-color: #f8f9fa;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      [data-bs-theme="dark"] .google-btn:hover {
+          background-color: #2b3035;
+      }
+
+
+      /* Feature: Dark Mode Toggle Switch */
+      .theme-switch-wrapper {
+        display: flex;
+        align-items: center;
+      }
+      .theme-switch {
+        display: inline-block;
+        height: 34px;
+        position: relative;
+        width: 60px;
+        margin-left: 15px;
+      }
+      .theme-switch input {
+        display: none;
+      }
+      .slider {
+        background-color: #ccc;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+      .slider:before {
+        background-color: #fff;
+        bottom: 4px;
+        content: "";
+        height: 26px;
+        left: 4px;
+        position: absolute;
+        transition: 0.4s;
+        width: 26px;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: var(--primary-gradient);
+      }
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="app-header">
+        <div class="d-flex align-items-center">
+            <img
+              class="myimg me-3"
+              src="{{ url_for('static', filename='img.png') }}"
+              alt="Logo"
+            />
+            <a class="brand-title" href="/">MediPredict AI</a>
+        </div>
+        
+        <div class="theme-switch-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sun-fill text-warning me-2" viewBox="0 0 16 16">
+                <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.414a.5.5 0 1 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.75 12.879a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+            </svg>
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider"></div>
+            </label>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-moon-fill text-info ms-2" viewBox="0 0 16 16">
+                <path d="M6 .278a.77.77 0 0 1-.3.725l-2.73 1.96 1.134 3.424a.77.77 0 0 1-.16.746c-.22.25-.53.385-.853.385-.32 0-.62-.132-.835-.373l-.924-1.03-3.05 1.059a.77.77 0 0 1-.415-.494l-.75-2.25c-.114-.34-.055-.71.16-1.02.215-.31.54-.485.875-.485.337 0 .65.176.873.483l.896 1.25.924-1.03a.77.77 0 0 1 .65-.372c.323 0 .633.134.853.385.215.25.326.57.326.892zM10.854.79a.5.5 0 0 1 .637-.052l1.528 1.185a.5.5 0 0 1-.637.785L11.516 1.465a.5.5 0 0 1-.662-.767"/>
+            </svg>
+        </div>
+    </header>
+
+    <div class="container auth-container">
+        <div class="auth-card">
+            
+            <h2 class="text-center auth-title display-6">
+                ✨ Join MediPredict
+            </h2>
+            
+            <form id="signup-form" action="#" method="POST">
+                <div class="mb-3">
+                    <label for="signup-name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="signup-name" name="name" placeholder="Full Name (e.g., Jane Doe)" required>
+                </div>
+                <div class="mb-3">
+                    <label for="signup-email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="signup-email" name="email" placeholder="name@medipredict.ai" required>
+                </div>
+                <div class="mb-3">
+                    <label for="signup-password" class="form-label">Create Password</label>
+                    <input type="password" class="form-control" id="signup-password" name="password" placeholder="Minimum 8 characters" required>
+                </div>
+                
+                <div class="mb-4 form-check">
+                    <input type="checkbox" class="form-check-input" id="terms-check" required>
+                    <label class="form-check-label small" for="terms-check">
+                        I agree to the <a href="#" class="text-decoration-none fw-bold">Terms of Service</a> and Privacy Policy.
+                    </label>
+                </div>
+
+                <div class="d-grid mb-4">
+                    <button type="submit" class="btn main-btn btn-lg">
+                        Create Account
+                    </button>
+                </div>
+                
+                <p class="text-center text-muted small">OR</p>
+
+                <div class="d-grid mb-3">
+                    <button type="button" class="btn google-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-google me-2" viewBox="0 0 16 16">
+                            <path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.118a6.5 6.5 0 0 1-3.58 5.625c-.2.12-.4.18-.6.18h-.001a.5.5 0 0 1 0-1h.001a5.5 5.5 0 0 0 3.033-4.832.5.5 0 0 1 .11-.322l1.1-1.1zm-3.52 3.016a.5.5 0 0 1 0-.999h.001a3.5 3.5 0 0 0 1.957-3.065.5.5 0 0 1 1.001 0 4.5 4.5 0 0 1-2.482 3.929zM1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/>
+                        </svg>
+                        Sign up with Google
+                    </button>
+                </div>
+
+                <hr>
+                <div class="text-center small">
+                    Already have an account? 
+                    <a href="/login" class="text-decoration-none fw-bold">Log In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    
+    <script>
+      const checkbox = document.getElementById("checkbox");
+      const htmlElement = document.documentElement;
+
+      // --- Dark/Light Mode Logic ---
+      function setTheme(theme) {
+          htmlElement.setAttribute('data-bs-theme', theme);
+          localStorage.setItem('theme', theme);
+          
+          // Adjust Header background based on theme
+          const header = document.querySelector('.app-header');
+          if (theme === 'dark') {
+              header.style.backgroundColor = '#1a1a1a';
+          } else {
+              header.style.backgroundColor = 'white'; 
+          }
+      }
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      setTheme(savedTheme);
+      if (savedTheme === 'dark') {
+          checkbox.checked = true;
+      }
+
+      // Event listener for toggle switch
+      checkbox.addEventListener('change', function () {
+          if (this.checked) {
+              setTheme('dark');
+          } else {
+              setTheme('light');
+          }
+      });
+      // --- End Dark/Light Mode Logic ---
+    </script>
+  </body>
+</html>
