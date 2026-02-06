@@ -140,11 +140,11 @@
         border-radius: 50%;
         object-fit: cover;
         border: 4px solid #007bff;
+        background: white;
         margin: 0 auto;
       }
-      
-      /* Feature: Dark Mode Toggle Switch (Copied from previous file) */
-      .theme-switch-wrapper {
+
+        .theme-switch-wrapper {
         display: flex;
         align-items: center;
       }
@@ -295,7 +295,9 @@
 
             <div class="col">
                 <div class="team-card">
-                    <img src="https://placehold.co/100x100/28a745/ffffff?text=MB" alt="Mukund Bansal" class="member-avatar" style="border-color: #28a745;">
+                  <img src="{{ url_for('static', filename='me.png') }}"
+                  class="member-avatar avatar-small"
+                  alt="Mukund Bansal" class="member-avatar" style="border-color: #ebf3ed00;">
                     <h5 class="mt-4">Mukund Bansal</h5>
                     <p class="team-role-line">A core contributor to this health prediction platform.</p>
                     <p class="text-muted small">Focused on robust backend system architecture.</p>
@@ -304,7 +306,9 @@
 
             <div class="col">
                 <div class="team-card">
-                    <img src="https://placehold.co/100x100/dc3545/ffffff?text=NG" alt="Nikhil Gupta" class="member-avatar" style="border-color: #dc3545;">
+                    <!-- <img src="nikhil.jpeg"  -->
+                    <img src="{{ url_for('static', filename='nikhil.jpeg') }}"
+                    alt="Nikhil Gupta" class="member-avatar" style="border-color: #dc3545;">
                     <h5 class="mt-4">Nikhil Gupta</h5>
                     <p class="team-role-line">A core contributor to this health prediction platform.</p>
                     <p class="text-muted small">Worked on data integrity and model refinement.</p>
